@@ -2,15 +2,15 @@
 let slideIndex = 1;
 let slideTimer;
 
-// Initialize slideshow when page loads
+// Initialize everything when page loads
 document.addEventListener('DOMContentLoaded', function() {
+    // Initialize slideshow
     showSlides(slideIndex);
     startAutoSlide();
     
     // Mobile menu toggle
     const menuToggle = document.querySelector('.menu-toggle');
     const navMenu = document.querySelector('.nav-menu');
-    const sideMenu = document.querySelector('.side-menu');
     
     if (menuToggle) {
         menuToggle.addEventListener('click', function() {
@@ -24,6 +24,12 @@ document.addEventListener('DOMContentLoaded', function() {
         link.addEventListener('click', function() {
             navMenu.classList.remove('active');
         });
+    });
+    
+    // Observe all content cards for scroll animation
+    const cards = document.querySelectorAll('.content-card');
+    cards.forEach(card => {
+        observer.observe(card);
     });
 });
 
@@ -118,11 +124,3 @@ const observer = new IntersectionObserver(function(entries) {
         }
     });
 }, observerOptions);
-
-// Observe all content cards
-document.addEventListener('DOMContentLoaded', function() {
-    const cards = document.querySelectorAll('.content-card');
-    cards.forEach(card => {
-        observer.observe(card);
-    });
-});
